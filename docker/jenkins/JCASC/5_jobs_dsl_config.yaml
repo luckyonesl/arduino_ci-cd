@@ -1,0 +1,30 @@
+jobs:
+  - script: |
+      folder("personal") {
+        description ("\n Internal")
+        displayName('personal stuff')
+        }
+      multibranchPipelineJob("personal/ardoino") {
+        displayName("Ardoino Projects")
+        description("\nDescription : This Job executes some builds")
+        orphanedItemStrategy  {
+          discardOldItems  {
+            daysToKeep(1)
+            numToKeep(0)
+          }
+        }
+        branchSources{
+              git {
+                id("ardoino")
+                remote("${ARDOINOREP}")
+                credentialsId('ssh_jenkins')
+                includes('*')
+            }
+          }
+          factory {
+              workflowBranchProjectFactory {
+              scriptPath("Jenkinsfile")
+              }
+          }
+      }
+
