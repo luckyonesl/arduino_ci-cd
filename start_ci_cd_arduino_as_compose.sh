@@ -22,10 +22,10 @@ echo 'DOCKERCLOUDCONNECTION=unix:///var/run/docker.sock' >> ${COMPOSE_ENV_FILE}
 echo 'CASC_JENKINS_CONFIG=/usr/share/jenkins/ref/JCASC'  >> ${COMPOSE_ENV_FILE}
 echo "DOCKERHOSTNAME=slair"  >> ${COMPOSE_ENV_FILE}
 echo "DOCKERNETWORK=docker_default" >> ${COMPOSE_ENV_FILE}
-echo 'ARDOINOREP=gitolite3@192.168.2.101:ardoino_projects' >> ${COMPOSE_ENV_FILE}
+echo 'ARDOINOREP=https://github.com/luckyonesl/arduino_projects.git' >> ${COMPOSE_ENV_FILE}
 echo "SSH_JENKINS_PUB_FILE=${WKDIR}/docker/secrets/id_rsajenkins.pub"  >> ${COMPOSE_ENV_FILE}
 #bind mot must be added to make it useable....
-echo 'SHAREDLIBREP=/Volumes/FRITZ.NAS/storage1/Software/jenkins_shared_lib.git'  >> ${COMPOSE_ENV_FILE}
+echo 'SHAREDLIBREP=https://github.com/luckyonesl/Jenkins_sharedlib.git'  >> ${COMPOSE_ENV_FILE}
 echo 'JAVA_OPTS=-Djenkins.install.runSetupWizard=false'  >> ${COMPOSE_ENV_FILE}
 
 #can be used to track wer it comes from ...

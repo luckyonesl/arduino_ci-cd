@@ -1,6 +1,6 @@
-# Arduino ci/cd
+# Arduino ci / cd
 
-the intention of this essembly is to have an automated build server that is able to compile and flash arduino project's.
+the intention of this assembly is to have an automated build server that is able to compile and flash arduino project's.
 
 ![overview](documentation/ci_cd_arduino.drawio.png )
 
@@ -26,8 +26,6 @@ based on [Raspbian](https://www.raspbian.org/) a jenkins slave is integrated to 
 
 is used to ship the code
 
-## technical documentation
-
-[technical documentation](documentation/technical_documentation.md)
+## [technical documentation](documentation/technical_documentation.md)
 
 [maybe for testing](https://github.com/Arduino-CI/arduino_ci)
