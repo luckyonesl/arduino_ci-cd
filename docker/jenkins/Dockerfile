@@ -10,6 +10,7 @@ COPY JCASC /usr/share/jenkins/ref/JCASC
 #to skip inital pwd 
 #ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 USER root
-#RUN curl -sSL https://get.docker.com/ | sh
+#install docker to be able to run example2
+RUN curl -sSL https://get.docker.com/ | sh
 #RUN usermod -a -G root jenkins
 #USER jenkins
