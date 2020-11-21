@@ -1,0 +1,32 @@
+jenkins:
+  clouds:
+  - docker:
+      dockerApi:
+        connectTimeout: 60
+        dockerHost:
+          uri: "${DOCKERCLOUDCONNECTION}"
+        hostname: "${DOCKERHOSTNAME}"
+        readTimeout: 60
+      errorDuration: 60
+      name: "docker_local"
+      templates:
+      - connector:
+          ssh:
+            sshKeyStrategy:
+              manuallyConfiguredSSHKey:
+                credentialsId: "ssh_jenkins"
+                sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        dockerTemplateBase:
+          cpuPeriod: 100000
+          cpuQuota: 100000
+          image: "${arduinocli_image}"
+          network: "docker_default"
+          volumes:
+          - "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"
+          volumesString: "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"
+        instanceCapStr: "2"
+        labelString: "arduinocli"
+        name: "arduinocli"
+        pullStrategy: PULL_NEVER
+        pullTimeout: 300
+        remoteFs: "/home/jenkins-slave/"
