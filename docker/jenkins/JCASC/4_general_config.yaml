@@ -9,6 +9,14 @@ jenkins:
       env:
       - key: "JENKINS_DEPLOYMENT_ID"
         value: "{{ JENKINS_DEPLOYMENT_ID }}"
+  labelAtoms:
+  - name: "ARM"
+  - name: "DOCKEREXECUTER"
+  - name: "FLASHER"
+  - name: "arduinocli"
+  - name: "master"
+  labelString: "DOCKEREXECUTER"
+  markupFormatter: "plainText"
 
   disableRememberMe: false
 
@@ -31,7 +39,7 @@ jenkins:
       remoteFS: "/home/jenkins-slave"
       retentionStrategy: "always"
 
-  numExecutors: 0
+  numExecutors: 2
 
   primaryView:
     all:

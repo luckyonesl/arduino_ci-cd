@@ -26,6 +26,7 @@ jenkins:
           volumesString: "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"
         instanceCapStr: "2"
         labelString: "arduinocli"
+        mode: EXCLUSIVE
         name: "arduinocli"
         pullStrategy: PULL_NEVER
         pullTimeout: 300
