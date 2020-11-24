@@ -8,6 +8,7 @@ services:
          - jenkins_environment
       secrets:
          - SSH_JENKINS_KEY
+         - JENKINS_ADMIN_PASSWORD
       ports:
          - "9090:8080"
       volumes:
@@ -22,3 +23,5 @@ services:
 secrets:
    SSH_JENKINS_KEY:
       file: secrets/id_rsajenkins
+   JENKINS_ADMIN_PASSWORD:
+      file: secrets/JENKINS_ADMIN_PASSWORD
