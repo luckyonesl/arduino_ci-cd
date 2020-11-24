@@ -88,4 +88,5 @@ lint/tmp/
 .DS_Store
 docker/secrets/id_rsajenkins
 docker/secrets/id_rsajenkins.pub
+docker/secrets/JENKINS_ADMIN_PASSWORD
 docker/.env

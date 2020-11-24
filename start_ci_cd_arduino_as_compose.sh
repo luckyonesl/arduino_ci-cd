@@ -13,10 +13,16 @@ if [ ! -f docker/secrets/id_rsajenkins ];then
 fi
 export SSH_JENKINS_KEY=`cat docker/secrets/id_rsajenkins`
 
+export JENKINS_ADMIN_ID=jadmin
+if [ ! -f docker/secrets/JENKINS_ADMIN_PASSWORD ];then
+   openssl rand -base64 14 > docker/secrets/JENKINS_ADMIN_PASSWORD
+fi
+
 if [ `docker images cicd_arduinocli:latest|wc -l` -lt 2 ];then
 	docker-compose -p cicd -f docker/docker-compose.yml build
 fi
 #the used docker image ( will not pulled )
+echo "JENKINS_ADMIN_ID=${JENKINS_ADMIN_ID}" >> ${COMPOSE_ENV_FILE}
 echo 'arduinocli_image=cicd_arduinocli:latest' >> ${COMPOSE_ENV_FILE}
 echo 'DOCKERCLOUDCONNECTION=unix:///var/run/docker.sock' >> ${COMPOSE_ENV_FILE}
 echo 'CASC_JENKINS_CONFIG=/usr/share/jenkins/ref/JCASC'  >> ${COMPOSE_ENV_FILE}
