@@ -20,7 +20,7 @@ jenkins:
           cpuPeriod: 100000
           cpuQuota: 100000
           image: "${arduinocli_image}"
-          network: "docker_default"
+          network: "${DOCKERNETWORK}"
           volumes:
           - "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"
           volumesString: "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"

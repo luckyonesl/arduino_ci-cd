@@ -26,8 +26,8 @@ echo "JENKINS_ADMIN_ID=${JENKINS_ADMIN_ID}" >> ${COMPOSE_ENV_FILE}
 echo 'arduinocli_image=cicd_arduinocli:latest' >> ${COMPOSE_ENV_FILE}
 echo 'DOCKERCLOUDCONNECTION=unix:///var/run/docker.sock' >> ${COMPOSE_ENV_FILE}
 echo 'CASC_JENKINS_CONFIG=/usr/share/jenkins/ref/JCASC'  >> ${COMPOSE_ENV_FILE}
-echo "DOCKERHOSTNAME=slair"  >> ${COMPOSE_ENV_FILE}
-echo "DOCKERNETWORK=docker_default" >> ${COMPOSE_ENV_FILE}
+echo "DOCKERHOSTNAME=`hostname -s`"  >> ${COMPOSE_ENV_FILE}
+echo "DOCKERNETWORK=cicd_default" >> ${COMPOSE_ENV_FILE}
 echo 'ARDOINOREP=https://github.com/luckyonesl/arduino_projects.git' >> ${COMPOSE_ENV_FILE}
 echo "SSH_JENKINS_PUB_FILE=${WKDIR}/docker/secrets/id_rsajenkins.pub"  >> ${COMPOSE_ENV_FILE}
 #bind mot must be added to make it useable....
