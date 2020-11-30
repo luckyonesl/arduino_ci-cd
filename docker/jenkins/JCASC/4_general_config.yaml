@@ -1,0 +1,100 @@
+jenkins:
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+
+  # Global variables
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "JENKINS_DEPLOYMENT_ID"
+        value: "{{ JENKINS_DEPLOYMENT_ID }}"
+  labelAtoms:
+  - name: "ARM"
+  - name: "DOCKEREXECUTER"
+  - name: "FLASHER"
+  - name: "arduinocli"
+  - name: "master"
+  labelString: "DOCKEREXECUTER"
+  markupFormatter: "plainText"
+
+  disableRememberMe: false
+
+  mode: NORMAL
+ 
+  myViewsTabBar: "standard"
+  nodes:
+  - permanent:
+      labelString: "ARM"
+      launcher:
+        ssh:
+          credentialsId: "ssh_jenkins"
+          host: "jk-slave"
+          port: 22
+          sshHostKeyVerificationStrategy: "knownHostsFileKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "FLASHER"
+      nodeDescription: "esp8266 flash ..."
+      numExecutors: 1
+      remoteFS: "/home/jenkins-slave"
+      retentionStrategy: "always"
+
+  numExecutors: 2
+
+  primaryView:
+    all:
+      name: "all"
+
+  quietPeriod: 5
+
+  scmCheckoutRetryCount: 0
+
+  slaveAgentPort: 50000
+
+  systemMessage: "This Jenkins is used for Arduino"
+  views:
+  - all:
+      name: "all"
+
+  # Jenkins Update Center (hosted in a remote repo on CI Artifactory)
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          description: "the key of jenkins ssh"
+          id: "ssh_jenkins"
+          passphrase: "${SSH_JENKINS_PASSWORD}"
+          privateKeySource:
+            directEntry:
+              privateKey: "${SSH_JENKINS_KEY}"
+          scope: GLOBAL
+          username: "jenkins-slave"
+
+unclassified:
+
+  # Global Jenkins shared libraries
+  globalLibraries:
+    libraries:
+      - name: "jenkins-shared-lib"
+        defaultVersion: "master"
+        includeInChangesets: false
+        implicit: false
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "${SHAREDLIBREP}"
+
+  timestamper:
+    allPipelines: true
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+
+  shell:
+    shell: "/bin/bash"

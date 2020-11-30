@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+   jenkins:
+      build:
+         context: jenkins
+         dockerfile: Dockerfile
+      env_file:
+         - jenkins_environment
+      secrets:
+         - SSH_JENKINS_KEY
+         - JENKINS_ADMIN_PASSWORD
+      ports:
+         - "9090:8080"
+      volumes:
+       - type: bind
+         source: /var/run/docker.sock
+         target: /var/run/docker.sock
+   arduinocli:
+      build:
+         context: arduinocli
+         dockerfile: Dockerfile
+
+secrets:
+   SSH_JENKINS_KEY:
+      file: secrets/id_rsajenkins
+   JENKINS_ADMIN_PASSWORD:
+      file: secrets/JENKINS_ADMIN_PASSWORD
