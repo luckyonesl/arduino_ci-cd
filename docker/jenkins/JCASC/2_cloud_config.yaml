@@ -11,7 +11,10 @@ jenkins:
       name: "docker_local"
       templates:
       - connector:
-          ssh:
+         ssh:
+            launchTimeoutSeconds: 5
+            maxNumRetries: 5
+            retryWaitTime: 5
             sshKeyStrategy:
               manuallyConfiguredSSHKey:
                 credentialsId: "ssh_jenkins"
@@ -21,9 +24,10 @@ jenkins:
           cpuQuota: 100000
           image: "${arduinocli_image}"
           network: "${DOCKERNETWORK}"
-          volumes:
-          - "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"
-          volumesString: "${SSH_JENKINS_PUB_FILE}:/home/jenkins-slave/.ssh/authorized_keys:ro"
+          mounts:
+          - "type=bind,source=${SSH_JENKINS_PUB_FILE},destination=/home/jenkins-slave/.ssh/authorized_keys"
+          mountsString: "type=bind,source=${SSH_JENKINS_PUB_FILE},destination=/home/jenkins-slave/.ssh/authorized_keys"
+          user: "jenkins-slave"
         instanceCapStr: "2"
         labelString: "arduinocli"
         mode: EXCLUSIVE

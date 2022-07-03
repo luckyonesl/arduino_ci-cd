@@ -36,4 +36,4 @@ echo 'JAVA_OPTS=-Djenkins.install.runSetupWizard=false'  >> ${COMPOSE_ENV_FILE}
 
 #can be used to track wer it comes from ...
 echo "JENKINS_DEPLOYMENT_ID=1" >> ${COMPOSE_ENV_FILE}
-cd docker && docker-compose -p cicd up --build jenkins
+cd docker && docker-compose -p cicd up --build -d jenkins
