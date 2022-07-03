@@ -1,6 +1,6 @@
 FROM jenkins/jenkins:lts
 #USER jenkins
-COPY known_hosts /usr/share/jenkins/ref/.ssh/known_hosts
+#COPY known_hosts /usr/share/jenkins/ref/.ssh/known_hosts
 COPY plugins.txt /usr/share/jenkins/ref/
 #by default it's in latest https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.1.3/jenkins-plugin-manager-2.1.3.jar
 #-Dhttps.proxyHost=${HTTP_PROXY_HOST} -Dhttps.proxyPort=${HTTP_PROXY_PORT}

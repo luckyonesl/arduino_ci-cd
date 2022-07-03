@@ -1,6 +1,7 @@
 version: '3.2'
 services:
    jenkins:
+      restart: unless-stopped:always 
       build:
          context: jenkins
          dockerfile: Dockerfile
